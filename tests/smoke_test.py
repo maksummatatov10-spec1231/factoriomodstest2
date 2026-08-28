@@ -150,6 +150,23 @@ if ent:
     anim = gs.get("animation") or {}
     layers = anim.get("layers") or []
     if len(layers) != 2: errors.append("graphics_set.animation.layers != 2")
+    # МАСШТАБ: файлы 2x от ванильных → на экране совпадают с каменной печкой
+    # только при scale = 0.25 (ваниль: 151x146 @ 0.5 == 302x292 @ 0.25)
+    for li, l in enumerate(layers):
+        if l.get("scale") != 0.25:
+            errors.append(f"animation.layers[{li}].scale != 0.25 (спрайт будет в 2 раза больше печки!)")
+    # ФРЕЙМЫ: все слои одной анимации обязаны иметь одинаковый frame_count
+    for li, l in enumerate(layers):
+        if (l.get("frame_count") or 1) != 1:
+            errors.append(f"animation.layers[{li}] frame_count != 1 (Different frame counts!)")
+    # working visualisations: fire 48 кадров согласован с glow (48)
+    for wi, w in enumerate(ent.get("working_visualisations") or []):
+        wa = w.get("animation") or {}
+        wlayers = wa.get("layers")
+        if isinstance(wlayers, list) and wlayers:
+            frames = [(l.get("frame_count") or 1) * (l.get("repeat_count") or 1) for l in wlayers]
+            if len(set(frames)) != 1:
+                errors.append(f"working_visualisations[{wi}]: разное число кадров {frames}")
     # КРИТИЧЕСКИ: движок требует одинаковое итоговое число кадров во всех слоях
     # animation.layers (frame_count * repeat_count). Разное -> "Different frame counts".
     def total_frames(layer):
@@ -230,7 +247,7 @@ for lang in ("en", "ru"):
 # ---------- info.json ----------
 info = json.load(open(os.path.join(MOD, "info.json")))
 if info["name"] != "fish-furnace": errors.append("info.name")
-if info["version"] != "1.0.2": errors.append("info.version")
+if info["version"] != "1.0.3": errors.append("info.version")
 if info.get("factorio_version") != "2.0": errors.append("info.factorio_version")
 if "base >= 2.0.0" not in info.get("dependencies", []): errors.append("dependencies")
 

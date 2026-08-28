@@ -125,21 +125,21 @@ data:extend(
             priority = "extra-high",
             width = 302,
             height = 292,
-            frame_count = 2,
+            -- 1 кадр: все слои анимации обязаны иметь одинаковое число кадров
+            frame_count = 1,
             shift = util.by_pixel(-0.25, 6),
-            scale = 0.5
+            -- файл 2x от ванильного 151x146 → scale 0.25, чтобы экранный
+            -- размер совпал с каменной печкой (151*0.5=75.5 px)
+            scale = 0.25
           },
           {
             filename = "__fish-furnace__/graphics/entity/fish-furnace/fish-furnace-shadow.png",
             priority = "extra-high",
             width = 328,
             height = 148,
-            -- тело имеет 2 кадра (моргание), тень — 1 кадр; движок требует
-            -- одинаковое итоговое число кадров: repeat_count = 2 (официальный способ)
-            repeat_count = 2,
             draw_as_shadow = true,
             shift = util.by_pixel(14.5, 13),
-            scale = 0.5
+            scale = 0.25
           }
         }
       },
@@ -160,8 +160,8 @@ data:extend(
                 height = 200,
                 frame_count = 48,
                 draw_as_glow = true,
-                shift = util.by_pixel(0, 15),
-                scale = 0.5
+                shift = util.by_pixel(-0.75, 5.5),
+                scale = 0.25
               },
               {
                 filename = "__fish-furnace__/graphics/entity/fish-furnace/fish-furnace-light.png",
@@ -170,8 +170,8 @@ data:extend(
                 height = 288,
                 repeat_count = 48,
                 draw_as_glow = true,
-                shift = util.by_pixel(0, 8),
-                scale = 0.5
+                shift = util.by_pixel(0, 5),
+                scale = 0.25
               }
             }
           }
@@ -188,7 +188,7 @@ data:extend(
             repeat_count = 48,
             draw_as_light = true,
             shift = util.by_pixel(-1, 44),
-            scale = 0.5
+            scale = 0.25
           }
         }
       },
@@ -236,7 +236,7 @@ data:extend(
         direction_count = 1,
         frame_count = 1,
         shift = util.by_pixel(0, 9.5),
-        scale = 0.5
+        scale = 0.25
       }
     }
   }

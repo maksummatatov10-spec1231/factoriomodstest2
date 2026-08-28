@@ -541,11 +541,8 @@ def make_icon(src):
 def main():
     print("== fish-furnace graphics v2 (полностью код) ==")
     a = draw_furnace(blink=False)
-    b = draw_furnace(blink=True)
-    sheet = Image.new("RGBA", (W * 2, H), (0, 0, 0, 0))
-    sheet.paste(a, (0, 0), a); sheet.paste(b, (W, 0), b)
-    sheet.save(os.path.join(OUT, "fish-furnace.png"))
-    print("  body sheet", sheet.size)
+    a.save(os.path.join(OUT, "fish-furnace.png"))
+    print("  body single frame", a.size)
 
     make_shadow().save(os.path.join(OUT, "fish-furnace-shadow.png"))
     fw, fh = 82, 200

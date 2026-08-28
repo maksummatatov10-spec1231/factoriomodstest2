@@ -1,19 +1,26 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.3
+Date: 28.08.2026
+  Bugfixes:
+    - Fixed entity being twice as large as the stone furnace on screen: sprite files are 2x (302x292 etc.) and now use scale = 0.25 like vanilla HR sprites (151x146 @ 0.5 == 302x292 @ 0.25). Furnace now fits exactly the same footprint as a stone furnace.
+    - Removed the 2-frame blinking body animation: all animation layers must have the same frame count. Single-frame body + 48-frame fire/glow/ground-light working visualisations.
+    - Corrected fire/light shifts to vanilla values so the flame sits inside the mouth.
+---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 28.08.2026
   Bugfixes:
-    - Fixed "Different frame counts (expected 1, but has 2) in animation layers" on load: the body animation has 2 frames (blinking eyes) but the shadow layer had 1 frame. Added repeat_count = 2 to the shadow layer — the official way to repeat a single sprite (all layers must resolve to the same total frame count).
+    - Fixed "Different frame counts (expected 1, but has 2) in animation layers" on load.
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 28.08.2026
   Bugfixes:
-    - Fixed "Unknown trigger effect item type: direct" on load: damaged_trigger_effect now uses the valid TriggerEffectItem type "create-entity" (rock-damaged-explosion), matching vanilla hit_effects.rock().
-    - Fixed repair sound path: __base__/sound/manual-repair.ogg does not exist; now uses the vanilla manual-repair-simple-1..5.ogg variations.
+    - Fixed "Unknown trigger effect item type: direct" on load: damaged_trigger_effect now uses the valid TriggerEffectItem type "create-entity" (rock-damaged-explosion).
+    - Fixed repair sound path (manual-repair.ogg does not exist; now uses vanilla manual-repair-simple-1..5.ogg).
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 28.08.2026
   Features:
     - Added Fish Furnace: crafted from 50 raw fish, unlocked by the "fish-furnace" technology (1 red science pack).
     - Works like a stone furnace, 4x faster, burns any chemical fuel.
-    - Custom code-generated graphics: fish-scale body, blinking fish eyes, teeth, fins, animated flame, glow, remnant.
+    - Custom code-generated graphics: fish-scale body, fish eyes, teeth, fins, animated flame, glow, remnant.
     - Localization: English and Russian.
