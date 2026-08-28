@@ -67,6 +67,22 @@ Different frame counts, scale-размер в 2 раз) + все правила 
 - `python3 scripts/build_mod.py mods/<имя>` — собрать `releases/<имя>_<версия>.zip`
   с правильной папкой внутри + проверка путей к ассетам.
 
+## 📐 Чертежи: генерация кодом (готово к работе!)
+
+Формат, JSON-схема 2.0 (качество, 16 направлений, wires, расписания,
+параметризация), Lua API и все способы импорта — в
+`docs/blueprints/ЧЕРТЕЖИ-FACTORIO-2.0-ПОЛНЫЙ-ГАЙД.md`.
+
+- `scripts/blueprints/blueprint_lib.py` — кодек (encode/decode) + конструкторы;
+- `scripts/blueprints/examples.py` + `blueprints/examples/` — демо-чертежи
+  (JSON для импорта + строки 0eN...);
+- `tests/test_blueprints.py` — тесты на реальных строках 2.0.
+
+`python3 scripts/blueprints/examples.py` · `python3 tests/test_blueprints.py`
+
+**Импорт в игру (2.0):** вставь JSON или строку `0eN...` в «Импорт строки»,
+или перетащи `.json`-файл на окно игры.
+
 ## 📌 Статус версий на сегодня
 
 - **Stable:** 2.0.77 · **Experimental:** 2.1.17 (ветка 2.1, 26.06.2026)
