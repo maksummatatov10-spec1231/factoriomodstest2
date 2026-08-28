@@ -44,6 +44,29 @@ python3 scripts/make_thumbnail.py                  # thumbnail.png
 python3 tests/smoke_test.py                        # тест прототипов
 ```
 
+## 📚 Память проекта (обязательно к прочтению перед следующим модом)
+
+**`docs/моддинг-уроки-и-недочёты.md`** — все ошибки, допущенные в Fish Furnace (4
+критических фикса: `direct` вместо TriggerEffectItem, несуществующий звук,
+Different frame counts, scale-размер в 2 раз) + все правила и чек-лист перед
+релизом. Кратко:
+
+1. **Источник истины** — ванильный код (`wube/factorio-data`) + официальные
+   доки `lua-api.factorio.com/2.0.76/`. Любое поле/тип/файл — сначала проверить.
+2. **Экранный размер = файл × scale.** 2x-файлы → `scale = 0.25`.
+3. **frame_count одинаковый во всех слоях анимации**; повторы — `repeat_count`.
+4. **Пути к звукам/графике** — только существующие файлы (не выдумывать).
+5. **`damaged_trigger_effect` и др.** — типы из TriggerEffectItem, НЕ direct.
+6. **Тест обязателен**: `python3 tests/smoke_test.py` перед каждым коммитом.
+
+## 🗂 Шаблон для следующего мода
+
+- `templates/mod-template/` — готовая структура (info.json, data, control,
+  settings, локали en/ru, graphics, sound, changelog, README).
+- `python3 scripts/new_mod.py <имя> "<Заголовок>"` — создать мод из шаблона.
+- `python3 scripts/build_mod.py mods/<имя>` — собрать `releases/<имя>_<версия>.zip`
+  с правильной папкой внутри + проверка путей к ассетам.
+
 ## 📌 Статус версий на сегодня
 
 - **Stable:** 2.0.77 · **Experimental:** 2.1.17 (ветка 2.1, 26.06.2026)

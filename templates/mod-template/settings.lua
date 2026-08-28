@@ -1,0 +1,10 @@
+-- Настройки мода (опционально). Чтение: settings.startup["x"].value
+-- data:extend({
+--   {
+--     type = "bool-setting",
+--     name = "{{MOD_NAME}}-example",
+--     setting_type = "startup",
+--     default_value = true,
+--     order = "a"
+--   }
+-- })

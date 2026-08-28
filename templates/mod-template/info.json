@@ -1,0 +1,13 @@
+{
+  "name": "{{MOD_NAME}}",
+  "version": "1.0.0",
+  "title": "{{MOD_TITLE}}",
+  "author": "maksummatatov10",
+  "homepage": "https://github.com/maksummatatov10-spec1231/factoriomodstest2",
+  "description": "{{MOD_DESCRIPTION}}",
+  "factorio_version": "2.0",
+  "dependencies": [
+    "base >= 2.0.0"
+  ],
+  "license": "MIT"
+}
