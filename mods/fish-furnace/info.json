@@ -1,0 +1,13 @@
+{
+  "name": "fish-furnace",
+  "version": "1.0.0",
+  "title": "Fish Furnace",
+  "author": "maksummatatov10",
+  "homepage": "https://github.com/maksummatatov10-spec1231/factoriomodstest2",
+  "description": "A furnace made of 50 fish. 4x faster than a stone furnace, burns any chemical fuel. Smelts like a normal furnace. Fully code-generated fish-scale sprite, animated flame, blinking eyes.",
+  "factorio_version": "2.0",
+  "dependencies": [
+    "base >= 2.0.0"
+  ],
+  "license": "MIT"
+}

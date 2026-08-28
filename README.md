@@ -1,32 +1,50 @@
 # factoriomodstest2 — репозиторий для разработки модов Factorio
 
-Пока репозиторий содержит **исследовательскую базу** (готовимся к созданию модов):
+## ✅ Первый мод готов: **Fish Furnace (Рыбная печка)**
 
-## 📂 Что здесь
+> 📦 **Готовый архив для установки:**
+> `mods/fish-furnace/releases/fish-furnace_1.0.0.zip`
+> (скопируй в папку `%APPDATA%\Factorio\mods` → включи в игре → перезапуск)
 
-| Путь | Что это |
+| Что | Описание |
 |---|---|
-| `docs/ГЛАВНЫЙ_ОТЧЁТ_Factorio_2.0_и_моддинг.md` | 🎯 **Главный отчёт**: всё про обновления 2.0 → 2.0.76 (хронология всех 70 публичных версий, все системы), полный разбор моддинга, API-изменений, графики/анимаций/3D-пайплайна, звука, локализации, публикации + план, как я буду делать моды |
-| `docs/changelogs/полный-официальный-ченджлог-2.0.7-2.0.76.md` | Дословные официальные ченджлоги всех версий (из `wube/factorio-data/changelog.txt`) |
-| `docs/changelogs/modding-scripting-API-изменения-2.0.md` | По-версионная выжимка ВСЕХ изменений Modding/Scripting API — шпаргалка при обновлении модов |
-| `docs/ссылки-и-инструменты.md` | Быстрый список всех ссылок и инструментов (официальные + коммьюнити) |
+| 🐟 Крафт | **50 × сырая рыба** — вручную или в сборочной машине |
+| 🔬 Технология | **Рыбная печка** — 1 красная колба в лаборатории (после Automation) |
+| ⚙️ Механика | Как каменная печка, но **×4 скорость**, любое химическое топливо, 360 kW, 8 загрязнения |
+| 🎨 Графика | **Полностью сгенерирована кодом** (Python + Pillow, ни одного AI-изображения): чешуя, моргающие рыбие глаза, зубы, плавники, **48 кадров пламени** (value-noise), свечение, свет на земле, тень, останки, отражение в воде |
+| 🌍 Языки | **English + Русский** |
+| 📄 Файлы | `mods/fish-furnace/` (исходники) + `releases/` (zip) + `art/fish-furnace/preview-*.png` |
+| 🧪 Проверено | LuaJIT-смоук-тест `tests/smoke_test.py` — все прототипы, пути, локали валидны |
 
-## 🗺 План (после согласования идеи мода)
+**Превью в игре:** `art/fish-furnace/preview-in-game.jpg` · **Спрайты:** `art/fish-furnace/preview-sprites.png` · **Анимация:** `art/fish-furnace/preview.gif`
+
+---
+
+## 📂 Структура репозитория
 
 ```
-mods/<имя-мода>/
-├── info.json · changelog.txt · settings.lua
-├── data.lua · data-updates.lua · data-final-fixes.lua · control.lua
-├── prototypes/ · locale/{en,ru}/ · graphics/ · sound/ · migrations/
-└── thumbnails/thumbnail.png
-art/ (Blender-исходники, рендер-скрипты) · scripts/ (spriter-пайплайн) · tests/ · .github/workflows/
+mods/fish-furnace/          ← первый мод (исходники)
+│   ├── info.json / changelog.txt / data.lua / README.md
+│   ├── prototypes/ (entity, item, recipe, technology)
+│   ├── locale/en + locale/ru
+│   ├── graphics/ (кодовые PNG-шиты)
+│   ├── thumbnails/thumbnail.png
+│   └── releases/fish-furnace_1.0.0.zip   ← ГОТОВЫЙ МОД
+docs/                       ← исследования: отчёт по 2.0–2.0.76, ченджлоги, API
+scripts/                    ← генераторы графики (Python/Pillow), thumbnail
+tests/smoke_test.py         ← проверка прототипов (LuaJIT)
+art/fish-furnace/           ← превью (gif, jpg)
 ```
 
-## 📌 Статус версий на 28.08.2026
+## 🛠 Как перегенерировать графику/проверить
 
-- **Stable:** 2.0.77 · **Experimental:** 2.1.17 (ветка 2.1 с 26.06.2026, FFF-444)
-- Запрошенный диапазон 2.0 → 2.0.76 полностью покрыт отчётом (2.0.0–2.0.6 — закрытые тестовые сборки, публичный ченджлог начинается с 2.0.7).
+```bash
+python3 scripts/generate_fish_furnace_graphics.py  # все PNG + preview.gif
+python3 scripts/make_thumbnail.py                  # thumbnail.png
+python3 tests/smoke_test.py                        # тест прототипов
+```
 
-## 🔗 Ссылки
+## 📌 Статус версий на сегодня
 
-Официальные: [factorio.com](https://factorio.com) · [блог/FFF](https://factorio.com/blog) · [вики](https://wiki.factorio.com) · [API Lua](https://lua-api.factorio.com/latest/) · [инструменты моддера (данные игры)](https://github.com/wube/factorio-data) · [Mod Portal](https://mods.factorio.com) · [форумы](https://forums.factorio.com)
+- **Stable:** 2.0.77 · **Experimental:** 2.1.17 (ветка 2.1, 26.06.2026)
+- Мод целит в **2.0.x** (`base >= 2.0.0`), Space Age не требуется

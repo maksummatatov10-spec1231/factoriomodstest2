@@ -1,0 +1,8 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 28.08.2026
+  Features:
+    - Added Fish Furnace: crafted from 50 raw fish, unlocked by the "fish-furnace" technology (1 red science pack).
+    - Works like a stone furnace, 4x faster, burns any chemical fuel.
+    - Custom code-generated graphics: fish-scale body, blinking fish eyes, teeth, fins, animated flame, glow, remnant.
+    - Localization: English and Russian.
