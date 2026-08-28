@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 28.08.2026
+  Bugfixes:
+    - Fixed "Different frame counts (expected 1, but has 2) in animation layers" on load: the body animation has 2 frames (blinking eyes) but the shadow layer had 1 frame. Added repeat_count = 2 to the shadow layer — the official way to repeat a single sprite (all layers must resolve to the same total frame count).
+---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 28.08.2026
   Bugfixes:

@@ -150,6 +150,22 @@ if ent:
     anim = gs.get("animation") or {}
     layers = anim.get("layers") or []
     if len(layers) != 2: errors.append("graphics_set.animation.layers != 2")
+    # КРИТИЧЕСКИ: движок требует одинаковое итоговое число кадров во всех слоях
+    # animation.layers (frame_count * repeat_count). Разное -> "Different frame counts".
+    def total_frames(layer):
+        return (layer.get("frame_count") or 1) * (layer.get("repeat_count") or 1)
+    counts = [total_frames(l) for l in layers]
+    if len(set(counts)) != 1:
+        errors.append(f"разное число кадров в animation.layers: {counts} — нужен одинаковый frame_count*repeat_count!")
+    wv = gs.get("working_visualisations") or []
+    # а то же правило для каждой working visualisation
+    for wi, w in enumerate(wv):
+        wa = w.get("animation") or {}
+        wlayers = wa.get("layers")
+        if isinstance(wlayers, list) and wlayers:
+            wc = [total_frames(l) for l in wlayers]
+            if len(set(wc)) != 1:
+                errors.append(f"working_visualisations[{wi}]: разное число кадров в слоях: {wc}")
     wv = gs.get("working_visualisations") or []
     if len(wv) != 2: errors.append("working_visualisations != 2")
     energy = ent.get("energy_source") or {}

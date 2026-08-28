@@ -3,7 +3,7 @@
 ## ✅ Первый мод готов: **Fish Furnace (Рыбная печка)**
 
 > 📦 **Готовый архив для установки:**
-> `mods/fish-furnace/releases/fish-furnace_1.0.1.zip`
+> `mods/fish-furnace/releases/fish-furnace_1.0.2.zip`
 > (скопируй в папку `%APPDATA%\Factorio\mods` → включи в игре → перезапуск)
 
 | Что | Описание |

@@ -134,6 +134,9 @@ data:extend(
             priority = "extra-high",
             width = 328,
             height = 148,
+            -- тело имеет 2 кадра (моргание), тень — 1 кадр; движок требует
+            -- одинаковое итоговое число кадров: repeat_count = 2 (официальный способ)
+            repeat_count = 2,
             draw_as_shadow = true,
             shift = util.by_pixel(14.5, 13),
             scale = 0.5
