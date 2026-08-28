@@ -1,6 +1,6 @@
 # 🐟 Fish Furnace (Рыбная печка)
 
-**Мод для Factorio 2.0 (Space Age совместим).**
+**Мод для Factorio 2.0 (Space Age совместим). Версия: 1.0.1 (фикс загрузки).**
 
 ## Что это
 
@@ -15,7 +15,7 @@
 
 ## Установка
 
-1. Скопируй `releases/fish-furnace_1.0.0.zip` в папку модов:
+1. Скопируй `releases/fish-furnace_1.0.1.zip` в папку модов:
    - Windows: `%APPDATA%\Factorio\mods`
    - Linux: `~/.factorio/mods`
    - macOS: `~/Library/Application Support/factorio/mods`
@@ -51,7 +51,7 @@ fish-furnace/
 ├── graphics/            # сгенерировано scripts/generate_fish_furnace_graphics.py
 ├── thumbnails/thumbnail.png
 └── releases/
-    └── fish-furnace_1.0.0.zip   ← ГОТОВЫЙ АРХИВ ДЛЯ УСТАНОВКИ
+    └── fish-furnace_1.0.1.zip   ← ГОТОВЫЙ АРХИВ ДЛЯ УСТАНОВКИ
 ```
 
 ## Регенерация графики

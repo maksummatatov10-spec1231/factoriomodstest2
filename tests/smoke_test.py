@@ -106,17 +106,56 @@ it = get("item", "fish-furnace")
 rec = get("recipe", "fish-furnace")
 tech = get("technology", "fish-furnace")
 
+# Допустимые типы TriggerEffectItem (из официальной документации 2.0.76:
+# lua-api.factorio.com/2.0.76/types/TriggerEffectItem.html). Типа "direct" НЕТ!
+VALID_TRIGGER_TYPES = {
+    "activate-impact", "camera-effect", "create-asteroid-chunk", "create-decoratives",
+    "create-entity", "create-explosion", "create-fire", "create-smoke", "create-particle",
+    "create-sticker", "create-trivial-smoke", "create-pollution", "damage-entity",
+    "damage-tile", "destroy-cliffs", "destroy-decoratives", "footstep", "insert-item",
+    "invoke-tile-effect", "nested", "play-sound", "push-back", "script", "set-tile",
+    "show-explosion-on-chart"
+}
+
 if ent:
     if ent.get("crafting_speed") != 4: errors.append("crafting_speed != 4")
     if ent.get("energy_usage") != "360kW": errors.append("energy_usage != 360kW")
     if ent.get("corpse") != "fish-furnace-remnants": errors.append("corpse mismatch")
     if (ent.get("minable") or {}).get("result") != "fish-furnace": errors.append("minable.result")
+    # КРИТИЧЕСКАЯ проверка: damaged_trigger_effect должен быть валидным TriggerEffectItem
+    dte = ent.get("damaged_trigger_effect")
+    if not dte:
+        errors.append("damaged_trigger_effect отсутствует")
+    else:
+        if dte.get("type") not in VALID_TRIGGER_TYPES:
+            errors.append(f"damaged_trigger_effect.type = {dte.get('type')!r} — невалидный TriggerEffectItem!")
+    # звуки: в ваниле нет файла manual-repair.ogg — проверяем пути
+    for snd_name in ("repair_sound", "mined_sound", "open_sound", "close_sound"):
+        snd = ent.get(snd_name)
+        if snd is None: continue
+        def sound_files(x):
+            out = []
+            if isinstance(x, dict):
+                if "filename" in x: out.append(x["filename"])
+                for v in x.values():
+                    if isinstance(v, (dict, list)): out += sound_files(v)
+            elif isinstance(x, list):
+                for v in x: out += sound_files(v)
+            return out
+        for path in sound_files(snd):
+            # несуществующий файл = ошибка загрузки звука
+            if "manual-repair.ogg" in path:
+                errors.append(f"{snd_name} ссылается на несуществующий manual-repair.ogg!")
     gs = ent.get("graphics_set") or {}
     anim = gs.get("animation") or {}
     layers = anim.get("layers") or []
     if len(layers) != 2: errors.append("graphics_set.animation.layers != 2")
     wv = gs.get("working_visualisations") or []
     if len(wv) != 2: errors.append("working_visualisations != 2")
+    energy = ent.get("energy_source") or {}
+    if energy.get("type") != "burner": errors.append("energy_source.type != burner")
+    if energy.get("fuel_categories") != ["chemical"]:
+        errors.append("fuel_categories != chemical")
 if it:
     if it.get("place_result") != "fish-furnace": errors.append("place_result")
 if rec:
@@ -175,7 +214,7 @@ for lang in ("en", "ru"):
 # ---------- info.json ----------
 info = json.load(open(os.path.join(MOD, "info.json")))
 if info["name"] != "fish-furnace": errors.append("info.name")
-if info["version"] != "1.0.0": errors.append("info.version")
+if info["version"] != "1.0.1": errors.append("info.version")
 if info.get("factorio_version") != "2.0": errors.append("info.factorio_version")
 if "base >= 2.0.0" not in info.get("dependencies", []): errors.append("dependencies")
 

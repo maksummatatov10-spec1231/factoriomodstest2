@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 28.08.2026
+  Bugfixes:
+    - Fixed "Unknown trigger effect item type: direct" on load: damaged_trigger_effect now uses the valid TriggerEffectItem type "create-entity" (rock-damaged-explosion), matching vanilla hit_effects.rock().
+    - Fixed repair sound path: __base__/sound/manual-repair.ogg does not exist; now uses the vanilla manual-repair-simple-1..5.ogg variations.
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 28.08.2026
   Features:

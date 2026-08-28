@@ -25,10 +25,28 @@ data:extend(
     max_health = 200,
     corpse = "fish-furnace-remnants",
     dying_explosion = "stone-furnace-explosion",
-    repair_sound = { filename = "__base__/sound/manual-repair.ogg" },
-    mined_sound = { filename = "__base__/sound/deconstruct-bricks.ogg", volume = 0.8 },
-    open_sound = { filename = "__base__/sound/machine-open.ogg" },
-    close_sound = { filename = "__base__/sound/machine-close.ogg" },
+    -- звуки: только реально существующие в ваниле пути (manual-repair.ogg НЕ существует!)
+    repair_sound =
+    {
+      variations =
+      {
+        { filename = "__base__/sound/manual-repair-simple-1.ogg", volume = 0.5 },
+        { filename = "__base__/sound/manual-repair-simple-2.ogg", volume = 0.5 },
+        { filename = "__base__/sound/manual-repair-simple-3.ogg", volume = 0.5 },
+        { filename = "__base__/sound/manual-repair-simple-4.ogg", volume = 0.5 },
+        { filename = "__base__/sound/manual-repair-simple-5.ogg", volume = 0.5 }
+      }
+    },
+    mined_sound =
+    {
+      variations =
+      {
+        { filename = "__base__/sound/deconstruct-bricks.ogg", volume = 0.8 }
+      },
+      aggregation = {max_count = 2, remove = true, count_already_playing = true}
+    },
+    open_sound = { filename = "__base__/sound/machine-open.ogg", volume = 0.5 },
+    close_sound = { filename = "__base__/sound/machine-close.ogg", volume = 0.29 },
     allowed_effects = {"speed", "consumption", "pollution"},
     effect_receiver = {
       uses_module_effects = false,
@@ -56,24 +74,15 @@ data:extend(
     },
     collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
     selection_box = {{-0.8, -1}, {0.8, 1}},
+    -- TriggerEffectItem: тип "direct" не существует (он только у TriggerDeliveryItem).
+    -- Копируем ванильный hit_effects.rock(): create-entity + rock-damaged-explosion.
     damaged_trigger_effect =
     {
-      type = "direct",
-      action_delivery =
-      {
-        type = "instant",
-        source_effects =
-        {
-          {
-            type = "create-particle",
-            repeat_count = 1,
-            particle_name = "stone-particle",
-            initial_speed = 0.5,
-            initial_height = 1,
-            offset_deviation = {{-0.3, -0.3}, {0.3, 0.3}}
-          }
-        }
-      }
+      type = "create-entity",
+      entity_name = "rock-damaged-explosion",
+      offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+      offsets = {{0, 1}},
+      damage_type_filters = "fire"
     },
     crafting_categories = {"smelting"},
     result_inventory_size = 1,
