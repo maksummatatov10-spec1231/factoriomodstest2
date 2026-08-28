@@ -230,7 +230,7 @@ for lang in ("en", "ru"):
 # ---------- info.json ----------
 info = json.load(open(os.path.join(MOD, "info.json")))
 if info["name"] != "fish-furnace": errors.append("info.name")
-if info["version"] != "1.0.1": errors.append("info.version")
+if info["version"] != "1.0.2": errors.append("info.version")
 if info.get("factorio_version") != "2.0": errors.append("info.factorio_version")
 if "base >= 2.0.0" not in info.get("dependencies", []): errors.append("dependencies")
 
