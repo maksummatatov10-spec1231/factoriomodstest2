@@ -1,0 +1,99 @@
+{
+  "blueprint": {
+    "item": "blueprint",
+    "label": "Iron Gear Cell (AM3)",
+    "entities": [
+      {
+        "entity_number": 1,
+        "name": "requester-chest",
+        "position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "direction": 0,
+        "request_filters": {
+          "request_from_buffers": true,
+          "sections": [
+            {
+              "index": 1,
+              "filters": [
+                {
+                  "index": 1,
+                  "name": "iron-plate",
+                  "comparator": "=",
+                  "count": 75
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 2,
+        "name": "inserter",
+        "position": {
+          "x": 1.0,
+          "y": 0.0
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 3,
+        "name": "assembling-machine-3",
+        "position": {
+          "x": 2.0,
+          "y": 0.0
+        },
+        "direction": 0,
+        "recipe": "iron-gear-wheel",
+        "recipe_quality": "normal"
+      },
+      {
+        "entity_number": 4,
+        "name": "inserter",
+        "position": {
+          "x": 3.0,
+          "y": 0.0
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 5,
+        "name": "passive-provider-chest",
+        "position": {
+          "x": 4.0,
+          "y": 0.0
+        },
+        "direction": 0
+      }
+    ],
+    "version": 562949956501504,
+    "icons": [
+      {
+        "index": 1,
+        "signal": {
+          "name": "assembling-machine-3"
+        }
+      },
+      {
+        "index": 2,
+        "signal": {
+          "name": "iron-gear-wheel"
+        }
+      },
+      {
+        "index": 3,
+        "signal": {
+          "name": "requester-chest"
+        }
+      },
+      {
+        "index": 4,
+        "signal": {
+          "name": "passive-provider-chest"
+        }
+      }
+    ],
+    "description": "AM3 iron gear wheel: requester (75 iron plates) -> AM3 -> passive provider. 2.0 format."
+  }
+}
